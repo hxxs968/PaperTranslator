@@ -25,9 +25,8 @@ def translate_text(text):
     system_prompt = """You are a professional academic translator specializing in computer vision and machine learning papers. 
 Translate the following English text into Chinese. Requirements:
 1. Maintain academic tone and technical accuracy
-2. Keep technical terms in English when appropriate (e.g., "Transformer", "CNN")
-3. Ensure the translation is fluent and natural in Chinese
-4. Only output the translated text, no explanations"""
+2. Ensure the translation is fluent and natural in Chinese
+3. Only output the translated text, no explanations"""
     
     try:
         response = client.chat.completions.create(
