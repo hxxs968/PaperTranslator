@@ -2,31 +2,26 @@
 
 #### requirements_fixed.txt 
 
-1. 删除错误或不需要的包：
+#### 1.删除错误或不需要的包：
 
-`request` → 删除
+ - `request` → 删除
+ - `tdqm` → 改为 `tqdm`
+ - `huggingface` → 删除
+ - `tensorflow` → 删除
 
-`tdqm` → 改为 `tqdm`
+#### 2.过旧版本：
 
-`huggingface` → 删除
+- `openai==0.27.0` → `openai>=1.0.0`
+- `python-dotenv==0.1.0` → `python-dotenv>=1.0.0`
 
-`tensorflow` → 删除
+#### 3.添加缺失的包：
 
-2. 过旧版本：
+- `tenacity>=8.2.0`
 
-`openai==0.27.0` → `openai>=1.0.0`
+#### 4.保留并确保正确版本：
 
-`python-dotenv==0.1.0` → `python-dotenv>=1.0.0`
-
-3. 添加缺失的包：
-
-`tenacity>=8.2.0`
-
-4. 保留并确保正确版本：
-
-`pandas>=2.0.0`
-
-`tqdm>=4.65.0`
+- `pandas>=2.0.0`
+- `tqdm>=4.65.0`
 
 ---
 
