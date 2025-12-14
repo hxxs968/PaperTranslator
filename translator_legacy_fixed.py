@@ -19,6 +19,7 @@ client = OpenAI(
     wait=wait_exponential(multiplier=1, min=2, max=30),
     retry=retry_if_exception_type((Exception,)),
 )
+
 def translate_text(text):
     model_name = "openai/gpt-oss-120b:fastest"
     
@@ -104,6 +105,7 @@ def main():
             print(f"Progress saved to checkpoint.")
             raise
     
+    # Save all
     print(f"\nSaving results to {output_file}...")
     df.to_csv(output_file, index=False, encoding="utf-8")
     print(f"\nTranslation complete! Total papers: {len(df)}")
