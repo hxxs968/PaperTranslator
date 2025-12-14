@@ -45,7 +45,7 @@ Translate the following English text into Chinese. Requirements:
 
 
 def load_checkpoint(checkpoint_file="checkpoint.csv"):
-    if os.path.exists(checkpoint_file):
+    if os.path.exists(checkpoint_file): 
         try:
             df_checkpoint = pd.read_csv(checkpoint_file)
             return df_checkpoint
@@ -79,26 +79,19 @@ def main():
     if 'abstract_cn' not in df.columns:
         df['abstract_cn'] = ''
     
-    # Translate
-    print(f"\nStarting translation")
-    
+    # Starting Translate 
     for index in tqdm(range(start_index, len(df)), desc="Translating papers"):
         row = df.iloc[index]
-        
-        if pd.notna(df.at[index, 'title_cn']) and df.at[index, 'title_cn'].strip():
-            continue
-        
+               
         try:
-            # Translate title
             if pd.notna(row['title']):
                 title_cn = translate_text(row['title'])
                 df.at[index, 'title_cn'] = title_cn
             
-            # Translate abstract
             if pd.notna(row['abstract']):
                 abstract_cn = translate_text(row['abstract'])
                 df.at[index, 'abstract_cn'] = abstract_cn
-            
+            # Save every 5 rows
             if (index + 1) % 5 == 0:
                 df.iloc[:index+1].to_csv(checkpoint_file, index=False, encoding="utf-8")
             
@@ -106,7 +99,6 @@ def main():
             
         except Exception as e:
             print(f"\nFailed to translate row {index} after retries: {e}")
-            print(f"   Paper: {row.get('title', 'N/A')[:50]}...")
             # Save what we have so far
             df.iloc[:index].to_csv(checkpoint_file, index=False, encoding="utf-8")
             print(f"Progress saved to checkpoint.")
@@ -114,8 +106,8 @@ def main():
     
     print(f"\nSaving results to {output_file}...")
     df.to_csv(output_file, index=False, encoding="utf-8")
-    print("\nTranslation complete!")
-    print(f"Total papers translated: {len(df)}")
+    print(f"\nTranslation complete! Total papers: {len(df)}")
+
 
 
 if __name__ == "__main__":
